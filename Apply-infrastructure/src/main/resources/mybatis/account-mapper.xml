@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.account.AccountMapper">
+
+    <!-- 根据账号查账户 -->
+    <select id="findByAccountNo" resultType="org.example.account.AccountDO">
+        SELECT account_id AS accountId, account_no AS accountNo, user_name AS userName,
+               balance, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
+        FROM tb_account
+        WHERE account_no = #{accountNo}
+    </select>
+
+    <!-- 更新余额 -->
+    <update id="updateBalance">
+        UPDATE tb_account
+        SET balance = #{balance}
+        WHERE account_no = #{accountNo}
+    </update>
+
+    <!-- 插入交易记录 -->
+    <insert id="insertTransaction" useGeneratedKeys="true" keyProperty="transactionId"
+            keyColumn="transaction_id"
+            parameterType="org.example.account.TransactionDO">
+        INSERT INTO tb_transaction (tx_no, from_account_no, to_account_no,
+                                    amount, tx_type, status, remark)
+        VALUES (#{txNo}, #{fromAccountNo}, #{toAccountNo},
+                #{amount}, #{txType}, #{status}, #{remark})
+    </insert>
+
+</mapper>
