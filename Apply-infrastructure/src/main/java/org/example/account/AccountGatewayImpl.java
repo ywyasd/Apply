@@ -53,4 +53,18 @@ public class AccountGatewayImpl implements AccountGateway {
         transactionDO.setRemark(transaction.getRemark());
         accountMapper.insertTransaction(transactionDO);
     }
+
+    @Override
+    public Account findByAccountNoWithLock(String accountNo) {
+        AccountDO accountDO = accountMapper.findByAccountNoForUpdate(accountNo);
+        if(accountDO == null) return null;
+        String statusStr = Integer.valueOf(1).equals(accountDO.getStatus()) ? "ACTIVE" : "FROZEN";
+        return new Account(
+                accountDO.getAccountId(),
+                accountDO.getAccountNo(),
+                accountDO.getUserName(),
+                accountDO.getBalance(),
+                statusStr
+        );
+    }
 }

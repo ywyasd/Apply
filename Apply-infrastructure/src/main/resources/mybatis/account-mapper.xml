@@ -29,4 +29,12 @@
                 #{amount}, #{txType}, #{status}, #{remark})
     </insert>
 
+    <!--悲观锁-->
+    <select id="findByAccountNoForUpdate" resultType="org.example.account.AccountDO">
+        SELECT account_id AS accountId, account_no AS accountNo, user_name AS userName,
+        balance, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
+        FROM tb_account
+        WHERE account_no = #{accountNo}
+        FOR UPDATE
+    </select>
 </mapper>

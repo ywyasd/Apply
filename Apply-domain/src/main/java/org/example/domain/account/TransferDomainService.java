@@ -28,8 +28,8 @@ public class TransferDomainService {
         }
 
         // 1. 查出付款方和收款方
-        Account fromAccount = accountGateway.findByAccountNo(fromAccountNo);
-        Account toAccount = accountGateway.findByAccountNo(toAccountNo);
+        Account fromAccount = accountGateway.findByAccountNoWithLock(fromAccountNo);
+        Account toAccount = accountGateway.findByAccountNoWithLock(toAccountNo);
 
         // 2. 扣款（如果余额不够，debit() 里会抛异常）
         fromAccount.debit(amount);

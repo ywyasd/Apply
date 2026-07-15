@@ -1,9 +1,8 @@
 package org.example.web.account;
 
+import org.example.account.executor.RechargeCmdExe;
 import org.example.api.AccountServiceI;
-import org.example.dto.account.AccountBalanceResp;
-import org.example.dto.account.TransferMoneyCmd;
-import org.example.dto.account.TransferResp;
+import org.example.dto.account.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +18,8 @@ public class AccountController {
 
     @Autowired
     private AccountServiceI accountService;
+    @Autowired
+    private RechargeCmdExe rechargeCmdExe;
 
     /**
      * 转账
@@ -36,5 +37,13 @@ public class AccountController {
     @GetMapping("/{accountNo}/balance")
     public AccountBalanceResp getBalance(@PathVariable String accountNo) {
         return accountService.getBalance(accountNo);
+    }
+
+    /*
+    * 充值
+    * */
+    @PostMapping("/recharge")
+    public RechargeResp recharge(@Valid @RequestBody RechargeCmd cmd){
+        return rechargeCmdExe.execute(cmd);
     }
 }

@@ -20,5 +20,7 @@ public interface AccountMapper {
 
     /** 插入交易记录 */
     void insertTransaction(TransactionDO transactionDO);
+
+    AccountDO findByAccountNoForUpdate(@Param("accountNo") String accountNo);
 }
 

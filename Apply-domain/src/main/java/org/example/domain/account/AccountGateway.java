@@ -16,4 +16,7 @@ public interface AccountGateway {
 
     /** 保存交易记录 */
     void saveTransaction(Transaction transaction);
+
+    /** 根据账号查账户（带悲观锁，防止并发扣款问题） */
+    Account findByAccountNoWithLock(String accountNo);
 }
