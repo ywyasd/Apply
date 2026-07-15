@@ -30,3 +30,6 @@ CREATE TABLE IF NOT EXISTS tb_transaction (
 -- 测试数据（只插入一次，余额为0开户）
 INSERT IGNORE INTO tb_account (account_no, user_name, balance) VALUES ('AC100001', '张三', 0.00);
 INSERT IGNORE INTO tb_account (account_no, user_name, balance) VALUES ('AC100002', '李四', 0.00);
+INSERT IGNORE INTO tb_account (account_no, user_name, balance) VALUES ('AC100003', '王五', 5000.00);
+INSERT IGNORE INTO tb_account (account_no, user_name, balance) VALUES ('AC100004', '赵六', 5000.00);
+INSERT IGNORE INTO tb_account (account_no, user_name, balance) VALUES ('AC100005', '孙七', 5000.00);
